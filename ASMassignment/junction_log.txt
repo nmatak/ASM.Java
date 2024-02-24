@@ -1,0 +1,340 @@
+Time: 14:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 14:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 14:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 14:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 14:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:31 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:31 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:31 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 14:31 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 14:41 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 14:41 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:41 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:41 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:51 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 14:51 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:51 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 14:51 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 15:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 15:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 15:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 15:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:31 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:31 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 15:31 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 15:31 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:41 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:41 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 15:41 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:41 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:51 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:51 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:51 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 15:51 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 16:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 16:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 16:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 16:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 16:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:31 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:31 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 16:31 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 16:31 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:41 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:41 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:41 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 16:41 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:51 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:51 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 16:51 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 16:51 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 17:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 17:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 17:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 17:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:31 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 17:31 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 17:31 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:31 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:41 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:41 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 17:41 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:41 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:51 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:51 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 17:51 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 17:51 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 18:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 18:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 18:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 18:31 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 18:31 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 18:31 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:31 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:41 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 18:41 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:41 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:41 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:51 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 18:51 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:51 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 18:51 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:01 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:01 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:01 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 19:01 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 19:11 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:11 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:11 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:11 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 19:21 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:21 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:21 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 19:21 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 25:57 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 25:57 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 25:57 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 25:57 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 26:07 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:07 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:07 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 26:07 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:17 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 26:17 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:17 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:17 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:27 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:27 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 26:27 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:27 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 26:37 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:37 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:37 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 26:37 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:47 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 26:47 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:47 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:47 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:57 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 26:57 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 26:57 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 26:57 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:07 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:07 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:07 - Junction A: 1 cars through from East, 0 cars waiting.
+
+Time: 27:07 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:17 - Junction C: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:17 - Junction A: 1 cars through from South, 0 cars waiting.
+
+Time: 27:17 - Junction D: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:17 - Junction B: 1 cars through from Unknown, 0 cars waiting.
+
+Time: 27:42 - Junction B: 1 cars through from North, 0 cars waiting.
+
+Time: 27:42 - Junction A: 1 cars through from South, 0 cars waiting.
+
