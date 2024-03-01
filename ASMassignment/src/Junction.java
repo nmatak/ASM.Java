@@ -175,7 +175,8 @@ public class Junction extends Thread {
         this.name = name;
         this.entryRoutes = entryRoutes;
         this.exitRoutes = exitRoutes;
-        this.numEntryRoutes = numEntryRoutes;
+        // this.numEntryRoutes = numEntryRoutes;
+        this.numEntryRoutes = roads.length;
         this.numExitRoutes = exitRoutes.length;
         this.roads = roads;
         this.destinationRoutes = destinationRoutes;
@@ -191,7 +192,6 @@ public class Junction extends Thread {
         South,
         East,
         Unknown,
-
     }
 
     public void setGreenLightDuration(int duration) {
@@ -209,9 +209,9 @@ public class Junction extends Thread {
                     TimeUnit.SECONDS.sleep(greenLightDuration); // Green light duration
                     greenLights[i] = 0; // Reset green light for current route
                     lock.unlock();
-
                     // Move cars across the junction for the current entry route
                     Direction direction = entryRouteDirections[i]; // Get direction for current entry route
+                    System.out.println(direction);
                     moveCars(i, direction); // Pass direction to moveCars method
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -221,40 +221,94 @@ public class Junction extends Thread {
     }
 
 
+    // private void moveCars(int entryRouteIndex, Direction direction) {
+    //     // Logic to move cars across the junction for the specified entry route
+    //     // This method needs to be implemented based on the requirements
+    //     int roadCapacity=roads[entryRouteIndex].getCapacity();
+    //     int carsThrough= roadCapacity; //determineCarsPassingThrough(entryRouteIndex);
+    //     int carsWaiting=0;
+    //    // carsWaiting[entryRouteIndex]=0;
+    //     String directionString= " ";
+
+    //     //carsThrough+= simulateCarsPassingThrough;
+
+    //     // Log the activity
+    //     logActivity(direction, carsThrough, carsWaiting,entryRouteIndex);
+    // }
     private void moveCars(int entryRouteIndex, Direction direction) {
         // Logic to move cars across the junction for the specified entry route
-        // This method needs to be implemented based on the requirements
-        int roadCapacity=roads[entryRouteIndex].getCapacity();
-        int carsThrough= roadCapacity; //determineCarsPassingThrough(entryRouteIndex);
-        int carsWaiting=0;
-       // carsWaiting[entryRouteIndex]=0;
-        String directionString= " ";
+        System.out.println("Enter Rout Index " + entryRouteIndex);
+        System.out.println("Array Length " + roads.length);
 
-        //carsThrough+= simulateCarsPassingThrough;
+        int roadCapacity = roads[entryRouteIndex].getCapacity();
+        int maxCars = Math.min(60, roadCapacity); // Calculate the maximum cars based on traffic flow rate
 
-        // Log the activity
-        logActivity(direction, carsThrough, carsWaiting,entryRouteIndex);
+        // Simulate cars moving through the junction
+        for (int i = 0; i < maxCars; i++) {
+            // Update carsWaiting (if needed)
+            if (carsWaiting[entryRouteIndex] > 0) {
+                carsWaiting[entryRouteIndex]--;
+            }
+
+            // Log the activity
+            logActivity(direction, 1, carsWaiting[entryRouteIndex], entryRouteIndex);
+
+            // Simulate car movement (you can adjust this based on your requirements)
+            try {
+                TimeUnit.MILLISECONDS.sleep(100); // Simulate car movement time
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+
+
     // Method to simulate cars passing through the junction
+    // private int determineCarsPassingThrough(int entryRouteIndex) {
+    //     // Initialize the number of cars passing through
+    //     int roadCapacity=roads[entryRouteIndex].getCapacity();
+    //     int carsThrough = Math.min(roadCapacity, determineCarsPassingThrough(entryRouteIndex));
+    //     int maxCars=0;
+
+    //     // Simulate the traffic flow based on the entry route index
+    //     switch (entryRouteIndex) {
+    //         case 0: // South
+    //             // Calculate maximum cars based on traffic flow rate
+    //             maxCars = Math.min(60, entryRoutes[entryRouteIndex]); // Maximum 60 cars or road capacity, whichever is lower
+    //             break;
+    //         case 1: // East
+    //             // Calculate maximum cars based on traffic flow rate
+    //             maxCars = Math.min(30, entryRoutes[entryRouteIndex]); // Maximum 30 cars or road capacity, whichever is lower
+    //             break;
+    //         case 2: // North
+    //             maxCars = Math.min(50, entryRoutes[entryRouteIndex]); // Maximum 30 cars or road capacity, whichever is lower
+    //         // Add cases for other entry routes as needed
+    //         default:
+    //             // Handle unknown entry routes
+    //             break;
+    //     }
+
+    //     return maxCars;
+    // }
     private int determineCarsPassingThrough(int entryRouteIndex) {
         // Initialize the number of cars passing through
-        int roadCapacity=roads[entryRouteIndex].getCapacity();
-        int carsThrough = Math.min(roadCapacity, determineCarsPassingThrough(entryRouteIndex));
-        int maxCars=0;
+        int roadCapacity = roads[entryRouteIndex].getCapacity();
+        int maxCars = 0;
 
         // Simulate the traffic flow based on the entry route index
         switch (entryRouteIndex) {
             case 0: // South
                 // Calculate maximum cars based on traffic flow rate
-                maxCars = Math.min(60, entryRoutes[entryRouteIndex]); // Maximum 60 cars or road capacity, whichever is lower
+                maxCars = Math.min(60, roadCapacity); // Maximum 60 cars or road capacity, whichever is lower
                 break;
             case 1: // East
                 // Calculate maximum cars based on traffic flow rate
-                maxCars = Math.min(30, entryRoutes[entryRouteIndex]); // Maximum 30 cars or road capacity, whichever is lower
+                maxCars = Math.min(30, roadCapacity); // Maximum 30 cars or road capacity, whichever is lower
                 break;
             case 2: // North
-                maxCars = Math.min(50, entryRoutes[entryRouteIndex]); // Maximum 30 cars or road capacity, whichever is lower
+                maxCars = Math.min(50, roadCapacity); // Maximum 50 cars or road capacity, whichever is lower
+                break;
             // Add cases for other entry routes as needed
             default:
                 // Handle unknown entry routes
@@ -263,6 +317,7 @@ public class Junction extends Thread {
 
         return maxCars;
     }
+
 
     private void updateCarsWaiting(int entryRouteIndex) {
         carsWaiting[entryRouteIndex]++; // Increment the counter for the corresponding entry route
