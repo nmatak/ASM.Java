@@ -65,7 +65,7 @@ public class Main {
 
         // Define and initialize Junctions
         Junction junctionA = new Junction("Junction A", entryRoutesA, exitRoutesA, 2,new Road[]{roadAtoB, roadAtoIndustrialCP},destinationRoutesA);
-        Junction junctionB = new Junction("Junction B", entryRoutesB, exitRoutesB,3, new Road[]{roadBtoC, roadBtoA},destinationRoutesB);
+        Junction junctionB = new Junction("Junction B", entryRoutesB, exitRoutesB,2, new Road[]{roadBtoC, roadBtoA},destinationRoutesB);
         Junction junctionC = new Junction("Junction C",entryRoutesC, exitRoutesC,2, new Road[]{roadCtoShoppingCentreCP, roadCtoD},destinationRoutesC);
         Junction junctionD = new Junction("Junction D",entryRoutesD,exitRoutesD,1,new Road[]{roadDtoStationCP, roadDtoUniCP},destinationRoutesD);
 
