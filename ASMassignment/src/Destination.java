@@ -8,7 +8,3 @@ public class Destination {
     public static final int UNIVERSITY = 6;
     public static final int STATION = 7;
 }
-
-
-
-
