@@ -1,55 +1,10 @@
 public class Main {
     public static void main(String[] args) {
+        // Initialize and configure your simulation here
+        // This includes setting up EntryPoints, Roads, Junctions, and CarParks
 
-        int[] entryRoutesA = {0, 1};// 0 from south and 1 from B
-        int[] entryRoutesB = {2,3,4}; //2 from east and 3 from A and 4 from C
-        int[] entryRoutesC = {5,6};// 5 from north and 6 from B
-        int[] entryRoutesD = {7}; // 7 from C
-
-        int[] exitRoutesA = {8,9}; // 8 to ICP and to B
-        int[] exitRoutesB = {10,11}; // 10 from B to a and 11 from b to c
-        int[] exitRoutesC = {12,13,14}; // 12 from c to b, and 13 to shoppingCP. 14 to D
-        int[] exitRoutesD = {15,16}; //15 to station and 16 to Uni
-
-        int[][] destinationRoutesA = {
-                // Exit Route 8   Exit Route 9
-                /* Entry Route 0 (South) */ {Destination.INDUSTRIAL_PARK, Destination.JUNCTION_B},
-                /* Entry Route 1 (From B) */ {Destination.INDUSTRIAL_PARK, Destination.JUNCTION_B}
-        };
-
-        int[][] destinationRoutesB = {
-                // Exit Route 10   Exit Route 11
-                /* Entry Route 2 (East) */ {Destination.JUNCTION_A, Destination.JUNCTION_C},
-                /* Entry Route 3 (From A) */ {Destination.JUNCTION_A, Destination.JUNCTION_C},
-                /* Entry Route 4 (From C) */ {Destination.JUNCTION_A, Destination.JUNCTION_C}
-        };
-
-        int[][] destinationRoutesC = {
-                // Exit Route 12   Exit Route 13   Exit Route 14
-                /* Entry Route 5 (North) */ {Destination.JUNCTION_B, Destination.SHOPPING_CENTRE, Destination.JUNCTION_D},
-                /* Entry Route 6 (From B) */ {Destination.JUNCTION_B, Destination.SHOPPING_CENTRE, Destination.JUNCTION_D}
-        };
-
-        int[][] destinationRoutesD = {
-                // Exit Route 15   Exit Route 16
-                /* Entry Route 7 (From C) */ {Destination.STATION, Destination.UNIVERSITY}
-        };
-
-
-
-        // Define and initialize EntryPoints
-        EntryPoint entryPointSouth = new EntryPoint("Entry Point South", 550, new Road[]{});
-        EntryPoint entryPointEast = new EntryPoint("Entry Point East", 300,new Road[]{} );
-        EntryPoint entryPointNorth = new EntryPoint("Entry Point North", 550, new Road[]{});
-
-        // Define and initialize CarParks
-        CarPark industrialParkCarPark = new CarPark("Industrial Park Car Park", new Road[]{}, 1000,12 );
-        CarPark shoppingCentreCarPark = new CarPark("Shopping Centre Car Park", new Road[]{},400,12);
-        CarPark universityCarPark = new CarPark("University Car Park", new Road[]{},100,12);
-        CarPark stationCarPark = new CarPark("Station Car Park", new Road[]{},150,12);
-
-        // Initialize Roads
-        Road roadSouthToA = new Road( 60, "Road South to Junction A");
+        // Define and initialize Roads
+        Road roadSouthToA = new Road(60, "Road South to Junction A");
         Road roadEastToB = new Road(30, "Road East to Junction B");
         Road roadNorthToC = new Road(50, "Road North to Junction C");
         Road roadAtoIndustrialCP = new Road(15, "Road Junction A to Industrial Park car park");
@@ -62,48 +17,83 @@ public class Main {
         Road roadDtoUniCP = new Road(15, "Road Junction D to University car park");
         Road roadDtoStationCP = new Road(15, "Road Junction D to Station car park");
 
+        // Define and initialize EntryPoints
+        Road[] roadsForSouthEntry = {roadSouthToA};
+        EntryPoint entryPointSouth = new EntryPoint("Entry Point South", 550, roadsForSouthEntry);
+        new Thread(entryPointSouth).start();
 
-        // Define and initialize Junctions
-        Junction junctionA = new Junction("Junction A", entryRoutesA, exitRoutesA, 2,new Road[]{roadAtoB, roadAtoIndustrialCP},destinationRoutesA);
-        Junction junctionB = new Junction("Junction B", entryRoutesB, exitRoutesB,2, new Road[]{roadBtoC, roadBtoA},destinationRoutesB);
-        Junction junctionC = new Junction("Junction C",entryRoutesC, exitRoutesC,2, new Road[]{roadCtoShoppingCentreCP, roadCtoD},destinationRoutesC);
-        Junction junctionD = new Junction("Junction D",entryRoutesD,exitRoutesD,1,new Road[]{roadDtoStationCP, roadDtoUniCP},destinationRoutesD);
+        Road[] roadsForEastEntry = {roadEastToB};
+        EntryPoint entryPointEast = new EntryPoint("Entry Point East", 300, roadsForEastEntry);
+        new Thread(entryPointEast).start();
 
+        Road[] roadsForNorthEntry = {roadNorthToC};
+        EntryPoint entryPointNorth = new EntryPoint("Entry Point North", 550, roadsForNorthEntry);
+        new Thread(entryPointNorth).start();
+        
 
+        // Define and initialize CarParks
+        CarPark industrialParkCarPark = new CarPark("Industrial Park Car Park", new Road[]{roadAtoIndustrialCP}, 1000, 12);
+        CarPark shoppingCentreCarPark = new CarPark("Shopping Centre Car Park", new Road[]{roadCtoShoppingCentreCP}, 400, 12);
+        CarPark universityCarPark = new CarPark("University Car Park", new Road[]{roadDtoUniCP}, 100, 12);
+        CarPark stationCarPark = new CarPark("Station Car Park", new Road[]{roadDtoStationCP}, 150, 12);
 
+        industrialParkCarPark.start();
+        shoppingCentreCarPark.start();
+        universityCarPark.start();
+        stationCarPark.start();
 
-        // Set up destination routes for Junctions
-        junctionA.setDestinationRoutes(new int[][]{{1, 2}}); // Industrial Park: 1, Junction B: 2
-        junctionB.setDestinationRoutes(new int[][]{{0, 2}}); // Junction A: 0, Junction C: 2
-        junctionC.setDestinationRoutes(new int[][]{{3, 7}}); // Junction D: 3, Shopping Centre Car Park: 7
-        junctionD.setDestinationRoutes(new int[][]{{8, 9}}); // University Car Park: 8, Station Car Park: 9
-
-        // Start the simulation
-        // Proceed with the rest of your simulation setup and start the simulation...
-
+        // Initialize Junctions
+        int[] entryRoutesA = {0, 1}; // Example entry routes for Junction A
+        int[] exitRoutesA = {8, 9}; // Example exit routes for Junction A
+        int[][] destinationRoutesA = {
+                // Exit Route 8   Exit Route 9
+                /* Entry Route 0 (South) */ {Destination.INDUSTRIAL_PARK, Destination.JUNCTION_B},
+                /* Entry Route 1 (From B) */ {Destination.INDUSTRIAL_PARK, Destination.JUNCTION_B}
+        };
+        Junction junctionA = new Junction("Junction A", entryRoutesA, exitRoutesA, 2, new Road[]{roadAtoB, roadAtoIndustrialCP}, destinationRoutesA);
         junctionA.start();
+
+        // Define and initialize Junction B
+        int[] entryRoutesB = {2, 3}; // Entry routes for Junction B
+        int[] exitRoutesB = {10, 11}; // Exit routes for Junction B
+        int[][] destinationRoutesB = {
+                // Exit Route 10   Exit Route 11
+                /* Entry Route 2 (From A) */ {Destination.JUNCTION_A, Destination.JUNCTION_C},
+                /* Entry Route 3 (From C) */ {Destination.JUNCTION_A, Destination.JUNCTION_C}
+        };
+        Junction junctionB = new Junction("Junction B", entryRoutesB, exitRoutesB, 2, new Road[]{roadBtoA, roadBtoC}, destinationRoutesB);
         junctionB.start();
+
+        // Define and initialize Junction C
+        int[] entryRoutesC = {4, 5}; // Entry routes for Junction C
+        int[] exitRoutesC = {12, 13}; // Exit routes for Junction C
+        int[][] destinationRoutesC = {
+                // Exit Route 12   Exit Route 13
+                /* Entry Route 4 (From B) */ {Destination.JUNCTION_B, Destination.SHOPPING_CENTRE},
+                /* Entry Route 5 (From D) */ {Destination.JUNCTION_B, Destination.UNIVERSITY}
+        };
+        Junction junctionC = new Junction("Junction C", entryRoutesC, exitRoutesC, 2, new Road[]{roadCtoB, roadCtoD}, destinationRoutesC);
         junctionC.start();
+
+        // Define and initialize Junction D
+        int[] entryRoutesD = {6, 7}; // Entry routes for Junction D
+        int[] exitRoutesD = {14, 15}; // Exit routes for Junction D
+        int[][] destinationRoutesD = {
+                // Exit Route 14   Exit Route 15
+                /* Entry Route 6 (From C) */ {Destination.JUNCTION_C, Destination.UNIVERSITY},
+                /* Entry Route 7 (From C) */ {Destination.JUNCTION_C, Destination.STATION}
+        };
+        Junction junctionD = new Junction("Junction D", entryRoutesD, exitRoutesD, 2, new Road[]{roadDtoUniCP, roadDtoStationCP}, destinationRoutesD);
         junctionD.start();
 
+        // Simulation runs for a specified duration
+        try {
+            Thread.sleep(60 * 60 * 1000); // Simulate running for 1 hour
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        String logContent = junctionA.readLogFile();
-        System.out.println("Junction Log Content:");
-        System.out.println(logContent);
-
-        String logContentB = junctionB.readLogFile();
-        System.out.println("Junction B Log Content:");
-        System.out.println(logContentB);
-
-        String logContentC = junctionC.readLogFile();
-        System.out.println("Junction C Log Content:");
-        System.out.println(logContentC);
-
-        String logContentD = junctionD.readLogFile();
-        System.out.println("Junction D Log Content:");
-        System.out.println(logContentD);
-
-
+        // Final reports or cleanup can be added here
+        System.out.println("Simulation ended.");
     }
 }
-

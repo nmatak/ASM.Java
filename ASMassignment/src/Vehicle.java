@@ -1,34 +1,4 @@
 import java.time.LocalTime;
-//public class Vehicle {
-//   // private String entryPointName;
-//    private int destination;
-//    private long entryTime;
-//    private long parkTime;
-//
-//    public Vehicle(String entryPointName, int destination, long entryTime) {
-//        //this.entryPointName = entryPointName;
-//        this.destination = destination;
-//        this.entryTime = entryTime;
-//    }
-//
-//    public int getDestination() {
-//        return destination;
-//    }
-//
-//    public void park(long parkTime) {
-//        this.parkTime = parkTime;
-//    }
-//
-//    public long getEntryTime() {
-//        return entryTime;
-//    }
-//
-//    public long getParkTime() {
-//        return parkTime;
-//    }
-//}
-// below is new
-
 
 public class Vehicle {
     private int destination;
@@ -56,4 +26,3 @@ public class Vehicle {
         this.parkedTime = parkedTime;
     }
 }
-
