@@ -1,12 +1,19 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Executors;
 
 public class Junction extends Thread {
-    private static long simulationTime = 0; 
+    private Map<String, Integer> locationCapacities;
+    private Map<String, Integer> locationIndices;
+    private ScheduledExecutorService scheduler;
+    private static long simulationTime = 0;
     private String name;
     private int[] entryRoutes;
     private int[] exitRoutes;
@@ -15,31 +22,121 @@ public class Junction extends Thread {
     private Road[] roads;
     private int[][] destinationRoutes;
     private int[] greenLights;
-    private int greenLightDuration; // Duration of green light for each road (in seconds)
+    private int greenLightDuration;
     private Lock lock;
     private int[] carsWaiting;
-    private Direction[] entryRouteDirections; // Directions for entry routes
-    private Direction[] exitRouteDirections; // Directions for exit routes
+    private Direction[] entryRouteDirections;
+    private Direction[] exitRouteDirections;
     private PrintWriter logWriter;
+    private Map<String, Integer> carsParked;
+    private Map<String, Long> totalJourneyTime;
+    private int totalCarsCreated = 0;
+    private int totalCarsParked = 0;
+    private int totalCarsQueued = 0;
 
-    public Junction(String name, int[] entryRoutes, int[] exitRoutes, int numEntryRoutes, Road[] roads, int[][] destinationRoutes) {
-        this.name = name;
-        this.entryRoutes = entryRoutes;
-        this.exitRoutes = exitRoutes;
-        this.numEntryRoutes = numEntryRoutes;
-        this.numExitRoutes = exitRoutes.length;
-        this.roads = roads;
-        this.destinationRoutes = destinationRoutes;
-        this.greenLights = new int[numEntryRoutes];
-        this.greenLightDuration = 10; // Default green light duration (in seconds)
-        this.lock = new ReentrantLock();
-        this.carsWaiting = new int[numEntryRoutes]; // Initialize the array with the size of the number of entry routes
-        initializeDirections(); // Call the method to initialize entryRouteDirections
-        try {
-            logWriter = new PrintWriter(new FileWriter("junction_" + name + "_log.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
+   public Junction(String name, int[] entryRoutes, int[] exitRoutes, int numEntryRoutes, Road[] roads, int[][] destinationRoutes) {
+    this.name = name;
+    this.entryRoutes = entryRoutes;
+    this.exitRoutes = exitRoutes;
+    this.numEntryRoutes = numEntryRoutes;
+    this.numExitRoutes = exitRoutes.length;
+    this.roads = roads;
+    this.destinationRoutes = destinationRoutes;
+    this.greenLights = new int[numEntryRoutes];
+    this.greenLightDuration = 10;
+    this.lock = new ReentrantLock();
+    this.carsWaiting = new int[numEntryRoutes];
+
+    locationCapacities = new HashMap<>();
+    locationCapacities.put("University", 56);
+    locationCapacities.put("Station", 99);
+    locationCapacities.put("Shopping centre", 123);
+    locationCapacities.put("Industrial car park", 762);
+
+    locationIndices = new HashMap<>();
+    locationIndices.put("University", 0);
+    locationIndices.put("Station", 1);
+    locationIndices.put("Shopping centre", 2);
+    locationIndices.put("Industrial car park", 3);
+
+    carsParked = new HashMap<>();
+    totalJourneyTime = new HashMap<>();
+    for (String location : locationCapacities.keySet()) {
+        carsParked.put(location, 0);
+        totalJourneyTime.put(location, 0L);
+    }
+
+    initializeDirections(); // Call initializeDirections() to ensure entryRouteDirections is initialized
+
+    scheduler = Executors.newScheduledThreadPool(1);
+    scheduler.scheduleAtFixedRate(this::outputTotalCounts, 0, 10, TimeUnit.MINUTES);
+
+    try {
+        logWriter = new PrintWriter(new FileWriter("junction_" + name + "_log.txt"));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+    public void logSpaces() {
+        int minutes = (int) (simulationTime / 60000);
+        int seconds = (int) ((simulationTime % 60000) / 1000);
+        String timeString = String.format("%dm%ds", minutes, seconds);
+
+        StringBuilder logMessage = new StringBuilder("Time: " + timeString + " ");
+        for (Map.Entry<String, Integer> entry : locationCapacities.entrySet()) {
+            String location = entry.getKey();
+            int capacity = entry.getValue();
+            int parkedCars = carsParked.getOrDefault(location, 0);
+            int spacesAvailable = capacity - parkedCars;
+
+            logMessage.append(location).append(": ").append(String.format("%03d", spacesAvailable)).append(" Spaces ");
         }
+        System.out.println(logMessage.toString());
+        logWriter.println(logMessage.toString());
+        logWriter.flush();
+    }
+
+    public void parkCar(String location, long journeyTime) {
+        int index = locationIndices.get(location);
+        int currentParked = carsParked.getOrDefault(location, 0);
+        carsParked.put(location, currentParked + 1);
+        totalJourneyTime.put(location, totalJourneyTime.getOrDefault(location, 0L) + journeyTime);
+        totalCarsParked++;
+    }
+
+    public void reportCarParkStatistics() {
+        for (String location : carsParked.keySet()) {
+            int cars = carsParked.get(location);
+            long totalTime = totalJourneyTime.get(location);
+            if (cars > 0) {
+                long averageTime = totalTime / cars;
+                String timeString = String.format("%dm%ds", TimeUnit.MILLISECONDS.toMinutes(averageTime), TimeUnit.MILLISECONDS.toSeconds(averageTime) % 60);
+                System.out.println(location + ": " + cars + " Cars parked, average journey time " + timeString);
+            }
+        }
+    }
+
+    public void shutdownScheduler() {
+        ScheduledExecutorService outputService = Executors.newScheduledThreadPool(1);
+        outputService.scheduleAtFixedRate(this::logSpaces, 1, 1, TimeUnit.MINUTES);
+
+        ScheduledExecutorService reportService = Executors.newScheduledThreadPool(1);
+        reportService.schedule(() -> {
+            reportCarParkStatistics();
+            outputService.shutdown();
+            reportService.shutdown();
+        }, 6, TimeUnit.MINUTES);
+    }
+
+    public void outputTotalCounts() {
+        int minutes = (int) (simulationTime / 60000);
+        String timeString = String.format("%dm", minutes);
+
+        System.out.println("Time: " + timeString + " University: " + carsParked.get("University") + " Spaces" +
+                " Station: " + carsParked.get("Station") + " Spaces" +
+                " Shopping Centre: " + carsParked.get("Shopping centre") + " Spaces" +
+                " Industrial Park: " + carsParked.get("Industrial car park") + " Spaces");
     }
 
     public enum Direction {
@@ -57,15 +154,13 @@ public class Junction extends Thread {
         while (true) {
             for (int i = 0; i < numEntryRoutes; i++) {
                 try {
-                    // Simulate green light for current entry route
                     lock.lock();
-                    greenLights[i] = 1; // Set green light for current route
-                    TimeUnit.SECONDS.sleep(greenLightDuration); // Green light duration
-                    greenLights[i] = 0; // Reset green light for current route
+                    greenLights[i] = 1;
+                    TimeUnit.SECONDS.sleep(greenLightDuration);
+                    greenLights[i] = 0;
                     lock.unlock();
-                    // Move cars across the junction for the current entry route
-                    Direction direction = entryRouteDirections[i]; // Get direction for current entry route
-                    moveCars(i, direction); // Pass direction to moveCars method
+                    Direction direction = entryRouteDirections[i];
+                    moveCars(i, direction);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -74,26 +169,21 @@ public class Junction extends Thread {
     }
 
     private void moveCars(int entryRouteIndex, Direction direction) {
-        // Correctly reference carsWaiting as an array
         int roadCapacity = roads[entryRouteIndex].getCapacity();
         int carsPassed = 0;
 
-        // Check if the road is full
         if (carsWaiting[entryRouteIndex] >= roadCapacity) {
             logActivity(direction, carsPassed, carsWaiting[entryRouteIndex], entryRouteIndex, "GRIDLOCK");
-            return; // Exit method if the road is full
+            return;
         }
 
-        // Calculate the number of cars to pass through based on the road capacity and waiting cars
-        int carsToPass = Math.min(roadCapacity - carsWaiting[entryRouteIndex], 60); // Adjust the number of cars to pass through
+        int carsToPass = Math.min(roadCapacity - carsWaiting[entryRouteIndex], 60);
 
-        // Simulate cars moving through the junction
         for (int i = 0; i < carsToPass; i++) {
-            carsWaiting[entryRouteIndex]--; // Decrease the waiting cars
-            carsPassed++; // Increase the cars passed
+            carsWaiting[entryRouteIndex]--;
+            carsPassed++;
             simulationTime += 100;
-            // Log the activity
-            logActivity(direction, carsPassed, carsToPass-carsPassed, entryRouteIndex, ""); // Ensure the gridlock status is an empty string when not gridlocked
+            logActivity(direction, carsPassed, carsToPass-carsPassed, entryRouteIndex, "");
 
             // Simulate car movement (you can adjust this based on your requirements)
             try {
@@ -101,19 +191,23 @@ public class Junction extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            // Simulate parking
+            parkCar("Shopping centre", 5000); // Example parking, adjust as needed
         }
     }
 
-
-
     private void logActivity(Direction direction, int carsPassed, int carsWaiting, int entryRouteIndex, String gridlockStatus) {
+        int minutes = (int) (simulationTime / 60000);
+        int seconds = (int) ((simulationTime % 60000) / 1000);
+        String timeString = String.format("%dm%ds", minutes, seconds);
+
         String directionString = direction.toString();
-        String logMessage = "Time: " + System.currentTimeMillis() / simulationTime + " - Junction " + name + ": " + carsPassed + " cars through from " + directionString + ", " + carsWaiting + " cars waiting. " + gridlockStatus;
+        String logMessage = "Time: " + timeString + " - Junction " + name + ": " + carsPassed + " cars through from " + directionString + ", " + carsWaiting + " cars waiting. " + gridlockStatus;
         System.out.println(logMessage);
         logWriter.println(logMessage);
         logWriter.flush();
     }
-
 
     private void initializeDirections() {
     // Initialize entryRouteDirections and exitRouteDirections based on the configuration
@@ -157,5 +251,4 @@ public class Junction extends Thread {
             }
         }
     }
-
 }

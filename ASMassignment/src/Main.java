@@ -1,3 +1,7 @@
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class Main {
     public static void main(String[] args) {
         // Initialize and configure your simulation here
@@ -86,14 +90,36 @@ public class Main {
         Junction junctionD = new Junction("Junction D", entryRoutesD, exitRoutesD, 2, new Road[]{roadDtoUniCP, roadDtoStationCP}, destinationRoutesD);
         junctionD.start();
 
-        // Simulation runs for a specified duration
-        try {
-            Thread.sleep(60 * 60 * 1000); // Simulate running for 1 hour
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Schedule the termination and statistics report
+        ScheduledExecutorService terminationService = Executors.newScheduledThreadPool(1);
+        terminationService.schedule(() -> {
+            // Simulate running for 6 minutes
+            System.out.println("Simulation ended.");
+            // Make sure to properly shut down all threads and services
+            // Shutdown all junctions
+            junctionA.shutdownScheduler();
+            junctionB.shutdownScheduler();
+            junctionC.shutdownScheduler();
+            junctionD.shutdownScheduler();
+            terminationService.shutdown(); // Initiate the shutdown process
+            // Call reportCarParkStatistics after 6 minutes
+            junctionA.reportCarParkStatistics();
+            junctionB.reportCarParkStatistics();
+            junctionC.reportCarParkStatistics();
+            junctionD.reportCarParkStatistics();
+        }, 6, TimeUnit.MINUTES); // Change to 6 minutes
 
-        // Final reports or cleanup can be added here
-        System.out.println("Simulation ended.");
+        // Output the name of the configuration file being used
+        System.out.println("Configuration file: junction_log.txt");
+
+        // Schedule outputTotalCounts to be called every minute
+        ScheduledExecutorService totalCountsService = Executors.newScheduledThreadPool(1);
+        totalCountsService.scheduleAtFixedRate(() -> {
+            junctionA.outputTotalCounts();
+            junctionB.outputTotalCounts();
+            junctionC.outputTotalCounts();
+            junctionD.outputTotalCounts();
+        }, 1, 1, TimeUnit.MINUTES); // Start after 1 minute and repeat every minute
+    
     }
 }
